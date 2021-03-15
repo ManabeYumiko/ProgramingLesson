@@ -2,31 +2,60 @@
 
 namespace Lesson1.ConsoleApp
 {
-    public class Account : Person
+    public class Account
     {
+        public Account(Person person)
+        {
+            person = Owner;
+        }
+
         public Account()
         {
+            Balance = 0;
         }
 
         public decimal Balance { get; protected set; }
 
+        public Person Owner { get; set; }
+
         public decimal Cashres(decimal cashres)
         {
-            return Balance -= cashres;
+            int result = 0;
+            if (Owner.Age > 25)
+            {
+                return Balance -= cashres;
+            }
+            else
+            {
+                Console.WriteLine("is unable to withdraw, invalid age to do it!");
+            }
+            return result;
         }
 
         public decimal CashSum(decimal cashsum)
         {
-            return Balance += cashsum;
+            int result = 0;
+            if (cashsum > 0)
+            {
+                return Balance += cashsum;
+            }
+            else
+            {
+                Console.WriteLine("incorrect money value, please set a correct amount!");
+            }
+            return result;
         }
 
-        public string ShowAccountData()
+        public virtual string ShowAccountData()
         {
-            string data = $"The account  belongs to {Name} {Age} {Dni} that have a balance of {Balance} ";
-            return data;
+            string kk = "";
+            string Message = $"The account belongs to {Owner.Dni} {Owner.Name} {Owner.Age} that have a balance of {Balance} ";
+            Console.WriteLine(Message);
+            return kk;
         }
     }
 
+    // there is the base class person
     public class Person
     {
         public Person()
@@ -34,13 +63,13 @@ namespace Lesson1.ConsoleApp
         }
 
         public int Age { get; set; }
-        public int Dni { get; private set; }
+        public int Dni { get; set; }
         public string Name { get; set; }
 
-        public bool OldMan()
+        public bool IsLegalperson()
         {
-            bool Result = Age > 18;
-            return Result;
+            bool result = Age > 18;
+            return result;
         }
 
         public void Show()
@@ -50,30 +79,25 @@ namespace Lesson1.ConsoleApp
         }
     }
 
+    //Here we have the young account class
     public class YoungAccount : Account
     {
         public YoungAccount()
         {
         }
 
-        public decimal Bonification { get; set; }
-
-        public decimal Bonus()
+        public decimal Bonus(decimal bonification)
         {
-            decimal porcentaje = (Balance * 23) / 100;
-            return Bonification += porcentaje;
+            decimal porcentage = Balance * 23;
+            decimal bonus = porcentage / 100;
+
+            return bonus;
         }
 
-        public string ShowYoungAccountData()
+        public override string ShowAccountData()
         {
-            string Mensaje = $"{Balance} and because your age you receive a bonification of {Bonification} then you have a total balance of {Balance + Bonification}";
-            return Mensaje;
-        }
-
-        private bool Oldman(bool v)
-        {
-            bool result = Age >= 25;
-            return result;
+            string msg = $"you have a bonus for the type of account :)";
+            return ShowAccountData() + msg;
         }
     }
 }

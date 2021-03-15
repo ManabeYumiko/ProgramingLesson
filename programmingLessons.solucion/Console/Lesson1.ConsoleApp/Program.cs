@@ -1,13 +1,18 @@
-﻿using System;
-
-namespace Lesson1.ConsoleApp
+﻿namespace Lesson1.ConsoleApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-           
+            Person person = new Person();
+            person.Name = "Alejandro";
+            person.Age = 19;
+            person.Dni = 1000286721;
+            person.Show();
+
+            Account account = new Account(person);
+
+            account.ShowAccountData();
         }
     }
-
 }
