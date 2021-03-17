@@ -6,12 +6,7 @@ namespace Lesson1.ConsoleApp
     {
         public Account(Person person)
         {
-            person = Owner;
-        }
-
-        public Account()
-        {
-            Balance = 0;
+            Owner = person;
         }
 
         public decimal Balance { get; protected set; }
@@ -82,22 +77,12 @@ namespace Lesson1.ConsoleApp
     //Here we have the young account class
     public class YoungAccount : Account
     {
-        public YoungAccount()
-        {
-        }
-
-        public decimal Bonus(decimal bonification)
-        {
-            decimal porcentage = Balance * 23;
-            decimal bonus = porcentage / 100;
-
-            return bonus;
-        }
+        public decimal Bonus { get; set; }
 
         public override string ShowAccountData()
         {
-            string msg = $"you have a bonus for the type of account :)";
-            return ShowAccountData() + msg;
+            Console.WriteLine($" You have a bonification of {Bonus}, to have a total of {Balance + Bonus}");
+            return "";
         }
     }
 }
